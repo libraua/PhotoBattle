@@ -1,11 +1,9 @@
-package com.libraua.photobattle.photobattle;
-
-import android.content.Intent;
-import android.content.IntentSender;
-import android.os.AsyncTask;
-import android.os.Bundle;
+package com.libraua.photobattle;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.IntentSender;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
