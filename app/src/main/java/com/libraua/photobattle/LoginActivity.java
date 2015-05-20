@@ -12,7 +12,8 @@ import android.widget.Button;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.plus.People;
+import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
 
 
 /**
@@ -25,6 +26,7 @@ public class LoginActivity extends PlusBaseActivity {
     private View mSignOutButtons;
     private View mLoginFormView;
     private View mProfilePhoto;
+    private Person mPerson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +109,9 @@ public class LoginActivity extends PlusBaseActivity {
                 revokeAccess();
             }
         });
-        People.getCurrentPerson();
+        mPerson = Plus.PeopleApi.getCurrentPerson(getPlusClient());
+        Image mImageInfo = mPerson.getImage();
+
         //TODO: Get profile id
         //TODO: Get profile photo
     }
