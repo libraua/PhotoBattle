@@ -12,6 +12,7 @@ import android.widget.Button;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.plus.People;
 
 
 /**
@@ -106,7 +107,9 @@ public class LoginActivity extends PlusBaseActivity {
                 revokeAccess();
             }
         });
-
+        People.getCurrentPerson();
+        //TODO: Get profile id
+        //TODO: Get profile photo
     }
 
     @Override
