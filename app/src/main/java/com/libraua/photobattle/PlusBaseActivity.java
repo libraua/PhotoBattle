@@ -17,7 +17,7 @@ import com.google.android.gms.plus.Plus;
  */
 public abstract class PlusBaseActivity extends Activity
         implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.OnConnectionFailedListener, PlusBaseInterface {
 
     private static final String TAG = PlusBaseActivity.class.getSimpleName();
 
@@ -35,24 +35,6 @@ public abstract class PlusBaseActivity extends Activity
     // If this IS null, then the connect method is still running.
     private ConnectionResult mConnectionResult;
     private GoogleApiClient mGoogleApiClient;
-
-    protected abstract void onPlusClientRevokeAccess();
-
-    /**
-     * Called when the PlusClient is successfully connected.
-     */
-    protected abstract void onPlusClientSignIn();
-
-    protected abstract void onPlusClientSignOut();
-
-    protected abstract void onPlusClientBlockingUI(boolean show);
-
-    /**
-     * Called when there is a change in connection state.  If you have "Sign in"/ "Connect",
-     * "Sign out"/ "Disconnect", or "Revoke access" buttons, this lets you know when their states
-     * need to be updated.
-     */
-    protected abstract void updateConnectButtonState();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

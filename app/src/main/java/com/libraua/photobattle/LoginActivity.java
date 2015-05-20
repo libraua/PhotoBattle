@@ -68,7 +68,7 @@ public class LoginActivity extends PlusBaseActivity {
     }
 
     @Override
-    protected void onPlusClientSignIn() {
+    public void onPlusClientSignIn() {
         //Set up sign out and disconnect buttons.
         Button signOutButton = (Button) findViewById(R.id.plus_sign_out_button);
         signOutButton.setOnClickListener(new OnClickListener() {
@@ -107,12 +107,12 @@ public class LoginActivity extends PlusBaseActivity {
 
 
     @Override
-    protected void onPlusClientBlockingUI(boolean show) {
+    public void onPlusClientBlockingUI(boolean show) {
         showProgress(show);
     }
 
     @Override
-    protected void updateConnectButtonState() {
+    public void updateConnectButtonState() {
         //TODO: Update this logic to also handle the user logged in by email.
         boolean connected = getPlusClient().isConnected();
 
@@ -121,13 +121,13 @@ public class LoginActivity extends PlusBaseActivity {
     }
 
     @Override
-    protected void onPlusClientRevokeAccess() {
+    public void onPlusClientRevokeAccess() {
         // TODO: Access to the user's G+ account has been revoked.  Per the developer terms, delete
         // any stored user data here.
     }
 
     @Override
-    protected void onPlusClientSignOut() {
+    public void onPlusClientSignOut() {
 
     }
 
