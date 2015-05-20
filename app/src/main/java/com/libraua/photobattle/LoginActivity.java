@@ -90,7 +90,6 @@ public class LoginActivity extends PlusBaseActivity {
             Picasso.with(this).load(mImageInfo.getUrl()).into(mProfilePhoto, new Callback() {
                 @Override
                 public void onSuccess() {
-                    //TODO move animation to static method
                     final boolean show = true;
                     AnimUtils.startAnimation(LoginActivity.this, show, mProgressView);
                 }
@@ -98,7 +97,6 @@ public class LoginActivity extends PlusBaseActivity {
                 @Override
                 public void onError() {
                     log("error during loading of picture");
-                    //TODO move animation to static method
                     final boolean show = true;
                     AnimUtils.startAnimation(LoginActivity.this, show, mProgressView);
                 }
