@@ -1,7 +1,5 @@
 package com.libraua.photobattle;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +13,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
+import com.libraua.photobattle.utils.AnimUtils;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -68,25 +67,8 @@ public class LoginActivity extends PlusBaseActivity {
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
+            AnimUtils.startAnimation(LoginActivity.this, show, mLoginFormView);
+            AnimUtils.startAnimation(LoginActivity.this, show, mProgressView);
         } else {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
@@ -118,19 +100,23 @@ public class LoginActivity extends PlusBaseActivity {
             Picasso.with(this).load(mImageInfo.getUrl()).into(mProfilePhoto, new Callback() {
                 @Override
                 public void onSuccess() {
-                    //TODO: Update to have an animation
-                    mProfilePhoto.setVisibility(View.VISIBLE);
+                    //TODO move animation to static method
+                    final boolean show = true;
+                    AnimUtils.startAnimation(LoginActivity.this, show, mProgressView);
                 }
 
                 @Override
                 public void onError() {
                     log("error during loading of picture");
-                    //TODO: Update to have an animation
-                    mProfilePhoto.setVisibility(View.GONE);
+                    //TODO move animation to static method
+                    final boolean show = true;
+                    AnimUtils.startAnimation(LoginActivity.this, show, mProgressView);
                 }
             });
         }
     }
+
+
 
     @Override
     protected void onPlusClientBlockingUI(boolean show) {
