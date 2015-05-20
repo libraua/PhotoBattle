@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
+import com.squareup.picasso.Picasso;
 
 
 /**
@@ -25,7 +27,7 @@ public class LoginActivity extends PlusBaseActivity {
     private SignInButton mPlusSignInButton;
     private View mSignOutButtons;
     private View mLoginFormView;
-    private View mProfilePhoto;
+    private ImageView mProfilePhoto;
     private Person mPerson;
 
     @Override
@@ -53,7 +55,7 @@ public class LoginActivity extends PlusBaseActivity {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
         mSignOutButtons = findViewById(R.id.plus_sign_out_buttons);
-        mProfilePhoto = findViewById(R.id.profile_photo);
+        mProfilePhoto = (ImageView) findViewById(R.id.profile_photo);
     }
 
     /**
@@ -110,10 +112,10 @@ public class LoginActivity extends PlusBaseActivity {
             }
         });
         mPerson = Plus.PeopleApi.getCurrentPerson(getPlusClient());
-        Image mImageInfo = mPerson.getImage();
-
-        //TODO: Get profile id
-        //TODO: Get profile photo
+        Person.Image mImageInfo = mPerson.getImage();
+        if (mImageInfo.hasUrl()) {
+            Picasso.with(this).load(mImageInfo.getUrl()).into(mProfilePhoto);
+        }
     }
 
     @Override
