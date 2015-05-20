@@ -23,7 +23,7 @@ public class LoginActivity extends PlusBaseActivity {
     private SignInButton mPlusSignInButton;
     private View mSignOutButtons;
     private View mLoginFormView;
-    private CircleImageView mProfilePhoto;
+    private View mProfilePhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

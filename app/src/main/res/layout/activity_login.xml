@@ -35,7 +35,7 @@
 
             </LinearLayout>
 
-            <CircleImageView
+            <com.pkmmte.view.CircularImageView
                 android:id="@+id/profile_photo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
