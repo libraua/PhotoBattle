@@ -102,7 +102,7 @@ public abstract class PlusBaseActivity extends Activity
         }
     }
 
-    private void log(String msg) {
+    void log(String msg) {
         Log.d(TAG, msg);
     }
 

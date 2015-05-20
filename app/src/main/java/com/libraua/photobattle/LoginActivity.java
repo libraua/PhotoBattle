@@ -15,6 +15,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 
@@ -112,9 +113,22 @@ public class LoginActivity extends PlusBaseActivity {
             }
         });
         mPerson = Plus.PeopleApi.getCurrentPerson(getPlusClient());
-        Person.Image mImageInfo = mPerson.getImage();
+        final Person.Image mImageInfo = mPerson.getImage();
         if (mImageInfo.hasUrl()) {
-            Picasso.with(this).load(mImageInfo.getUrl()).into(mProfilePhoto);
+            Picasso.with(this).load(mImageInfo.getUrl()).into(mProfilePhoto, new Callback() {
+                @Override
+                public void onSuccess() {
+                    //TODO: Update to have an animation
+                    mProfilePhoto.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onError() {
+                    log("error during loading of picture");
+                    //TODO: Update to have an animation
+                    mProfilePhoto.setVisibility(View.GONE);
+                }
+            });
         }
     }
 
